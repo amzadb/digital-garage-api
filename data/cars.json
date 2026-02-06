@@ -16,8 +16,8 @@
   {
     "id": 3,
     "make": "Porsche",
-    "model": "Taycan",
-    "year": 2024,
+    "model": "Macan",
+    "year": 2025,
     "electric": true
   },
   {
@@ -28,7 +28,7 @@
     "electric": false
   },
   {
-    "id": 1770381608354,
+    "id": 5,
     "make": "Honda",
     "model": "Civic",
     "year": 2024,

@@ -4,8 +4,8 @@ A RESTful API for managing a digital car garage built with Node.js and Express. 
 
 ## Features
 
-- 🚗 **Car Management**: Add, view, and manage cars in your digital garage
-- 🔧 **RESTful API**: Clean and organized REST endpoints
+- 🚗 **Car Management**: Full CRUD operations - Create, Read, Update, and Delete cars in your digital garage
+- 🔧 **RESTful API**: Clean and organized REST endpoints with complete HTTP methods
 - 📁 **File-based Storage**: Uses JSON files for persistent data storage
 - 🔄 **Auto-reload**: Development server with nodemon for automatic restarts
 - 📊 **Structured Data**: Well-organized car data with make, model, year, and electric status
@@ -65,6 +65,8 @@ digital-garage-api/
 | GET    | `/api/cars` | Get all cars |
 | GET    | `/api/cars/:id` | Get a specific car by ID |
 | POST   | `/api/cars` | Add a new car |
+| PUT    | `/api/cars/:id` | Update an existing car |
+| DELETE | `/api/cars/:id` | Delete a car |
 
 ### Response Format
 
@@ -101,6 +103,23 @@ curl -X POST http://localhost:3000/api/cars \
     "year": 2024,
     "electric": true
   }'
+```
+
+### Update an Existing Car
+```bash
+curl -X PUT http://localhost:3000/api/cars/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "make": "Tesla",
+    "model": "Model S",
+    "year": 2024,
+    "electric": true
+  }'
+```
+
+### Delete a Car
+```bash
+curl -X DELETE http://localhost:3000/api/cars/1
 ```
 
 ## Sample Data
