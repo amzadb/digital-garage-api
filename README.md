@@ -10,6 +10,7 @@ A RESTful API for managing a digital car garage built with Node.js and Express. 
 - 🔄 **Auto-reload**: Development server with nodemon for automatic restarts
 - 📊 **Structured Data**: Well-organized car data with make, model, year, and electric status
 - 📝 **Request Logging**: HTTP request logging with Morgan middleware for development and debugging
+- ✅ **Input Validation**: Robust data validation using Joi schema validation for all car data
 
 ## Project Structure
 
@@ -82,6 +83,25 @@ Cars are returned in this format:
 }
 ```
 
+### Validation Errors
+
+If validation fails, the API returns a 400 status with error details:
+```json
+{
+  "message": "Validation Error",
+  "details": "\"make\" length must be at least 2 characters long"
+}
+```
+
+## Data Validation
+
+The API uses Joi schema validation for all POST and PUT requests. The validation rules are:
+
+- **make**: String, minimum 2 characters, required
+- **model**: String, minimum 1 character, required  
+- **year**: Integer, between 1886 and 2026, required
+- **electric**: Boolean, required
+
 ## Usage Examples
 
 ### Get All Cars
@@ -135,6 +155,7 @@ The API comes with sample car data including:
 
 - **Node.js**: JavaScript runtime environment
 - **Express.js**: Web framework for Node.js
+- **Joi**: Schema validation library for input validation and data integrity
 - **Morgan**: HTTP request logger middleware for debugging and monitoring
 - **File System (fs)**: For JSON data persistence
 - **Nodemon**: Development dependency for auto-restarting server

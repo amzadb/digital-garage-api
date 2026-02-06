@@ -2,12 +2,37 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const Joi = require('joi'); 
 
 const DATA_PATH = path.join(__dirname, '../data/cars.json');
+
+// Define the blueprint (Schema) for a Car
+const carSchema = Joi.object({
+    make: Joi.string().min(2).required(),
+    model: Joi.string().min(1).required(),
+    year: Joi.number().integer().min(1886).max(2026).required(),
+    electric: Joi.boolean().required()
+});
 
 // Helper functions
 const readCars = () => JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'));
 const saveCars = (data) => fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
+
+// Validation helper function
+const validateCar = (req, res, next) => {
+    // Validate the incoming request body against our schema
+    const { error } = carSchema.validate(req.body);
+
+    if (error) {
+        // If validation fails, return a 400 (Bad Request) and the error message
+        return res.status(400).json({ 
+            message: "Validation Error", 
+            details: error.details[0].message 
+        });
+    }
+    
+    next(); // Continue to the next middleware/route handler
+};
 
 // GET all cars
 router.get('/', (req, res) => {
@@ -22,7 +47,7 @@ router.get('/:id', (req, res) => {
 });
 
 // POST new car
-router.post('/', (req, res) => {
+router.post('/', validateCar, (req, res) => {
     const cars = readCars();
     const newCar = { id: cars.length + 1, ...req.body };
     cars.push(newCar);
@@ -31,7 +56,7 @@ router.post('/', (req, res) => {
 });
 
 // PUT update car by ID
-router.put('/:id', (req, res) => {
+router.put('/:id', validateCar, (req, res) => {
     const cars = readCars();
     const carIndex = cars.findIndex(c => c.id === parseInt(req.params.id));
     
