@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "make": "Tesla",
+    "model": "Model 3",
+    "year": 2023,
+    "electric": true
+  },
+  {
+    "id": 2,
+    "make": "Ford",
+    "model": "Mustang",
+    "year": 1969,
+    "electric": false
+  },
+  {
+    "id": 3,
+    "make": "Porsche",
+    "model": "Taycan",
+    "year": 2024,
+    "electric": true
+  },
+  {
+    "id": 4,
+    "make": "Toyota",
+    "model": "Camry",
+    "year": 2022,
+    "electric": false
+  },
+  {
+    "id": 1770381608354,
+    "make": "Honda",
+    "model": "Civic",
+    "year": 2024,
+    "electric": false
+  }
+]
