@@ -4,7 +4,12 @@ const carRoutes = require('./routes/carRoutes'); // Import your routes
 const app = express();
 const PORT = 3000;
 
+// Middleware to parse JSON bodies
 app.use(express.json());
+
+// Use morgan for logging HTTP requests
+const morgan = require('morgan');
+app.use(morgan('dev')); 
 
 // Tell the app to use carRoutes for any URL starting with /api/cars
 app.use('/api/cars', carRoutes);

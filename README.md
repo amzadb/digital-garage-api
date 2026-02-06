@@ -9,6 +9,7 @@ A RESTful API for managing a digital car garage built with Node.js and Express. 
 - 📁 **File-based Storage**: Uses JSON files for persistent data storage
 - 🔄 **Auto-reload**: Development server with nodemon for automatic restarts
 - 📊 **Structured Data**: Well-organized car data with make, model, year, and electric status
+- 📝 **Request Logging**: HTTP request logging with Morgan middleware for development and debugging
 
 ## Project Structure
 
@@ -134,6 +135,7 @@ The API comes with sample car data including:
 
 - **Node.js**: JavaScript runtime environment
 - **Express.js**: Web framework for Node.js
+- **Morgan**: HTTP request logger middleware for debugging and monitoring
 - **File System (fs)**: For JSON data persistence
 - **Nodemon**: Development dependency for auto-restarting server
 
@@ -173,14 +175,3 @@ To contribute to this project:
 - [ ] Docker containerization
 - [ ] API documentation with Swagger
 
-## License
-
-This project is licensed under the ISC License.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Contact
-
-For questions or suggestions, please open an issue on the GitHub repository.
