@@ -11,6 +11,10 @@ app.use(express.json());
 const morgan = require('morgan');
 app.use(morgan('dev')); 
 
+// Use CORS to allow cross-origin requests
+const cors = require('cors');
+app.use(cors());
+
 // Tell the app to use carRoutes for any URL starting with /api/cars
 app.use('/api/cars', carRoutes);
 

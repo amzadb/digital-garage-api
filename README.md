@@ -1,3 +1,4 @@
+
 # Digital Garage API
 
 A RESTful API for managing a digital car garage built with Node.js and Express. This project allows you to perform CRUD operations on car data, making it perfect for learning API development or managing your car inventory digitally.
@@ -8,9 +9,9 @@ A RESTful API for managing a digital car garage built with Node.js and Express. 
 - 🔧 **RESTful API**: Clean and organized REST endpoints with complete HTTP methods
 - 📁 **File-based Storage**: Uses JSON files for persistent data storage
 - 🔄 **Auto-reload**: Development server with nodemon for automatic restarts
-- 📊 **Structured Data**: Well-organized car data with make, model, year, and electric status
+- 📊 **Structured Data**: Well-organized car data with brand, model, year, and fuel level
 - 📝 **Request Logging**: HTTP request logging with Morgan middleware for development and debugging
-- ✅ **Input Validation**: Robust data validation using Joi schema validation for all car data
+- ✅ **Input Validation**: Robust data validation using Joi schema validation for all car data (brand, model, year, fuelLevel)
 
 ## Project Structure
 
@@ -76,10 +77,10 @@ Cars are returned in this format:
 ```json
 {
   "id": 1,
-  "make": "Tesla",
-  "model": "Model 3",
-  "year": 2023,
-  "electric": true
+  "brand": "Tesla",
+  "model": "Cybertruck",
+  "year": 2024,
+  "fuelLevel": 85
 }
 ```
 
@@ -89,7 +90,7 @@ If validation fails, the API returns a 400 status with error details:
 ```json
 {
   "message": "Validation Error",
-  "details": "\"make\" length must be at least 2 characters long"
+  "details": "\"brand\" length must be at least 2 characters long"
 }
 ```
 
@@ -97,10 +98,10 @@ If validation fails, the API returns a 400 status with error details:
 
 The API uses Joi schema validation for all POST and PUT requests. The validation rules are:
 
-- **make**: String, minimum 2 characters, required
-- **model**: String, minimum 1 character, required  
+- **brand**: String, minimum 2 characters, required
+- **model**: String, minimum 1 character, required
 - **year**: Integer, between 1886 and 2026, required
-- **electric**: Boolean, required
+- **fuelLevel**: Integer, between 0 and 100, required
 
 ## Usage Examples
 
@@ -119,10 +120,10 @@ curl http://localhost:3000/api/cars/1
 curl -X POST http://localhost:3000/api/cars \
   -H "Content-Type: application/json" \
   -d '{
-    "make": "BMW",
-    "model": "i4",
-    "year": 2024,
-    "electric": true
+    "brand": "BMW",
+    "model": "X5",
+    "year": 2023,
+    "fuelLevel": 42
   }'
 ```
 
@@ -131,10 +132,10 @@ curl -X POST http://localhost:3000/api/cars \
 curl -X PUT http://localhost:3000/api/cars/1 \
   -H "Content-Type: application/json" \
   -d '{
-    "make": "Tesla",
-    "model": "Model S",
+    "brand": "Tesla",
+    "model": "Cybertruck",
     "year": 2024,
-    "electric": true
+    "fuelLevel": 90
   }'
 ```
 
@@ -146,10 +147,16 @@ curl -X DELETE http://localhost:3000/api/cars/1
 ## Sample Data
 
 The API comes with sample car data including:
-- Tesla Model 3 (2023, Electric)
-- Ford Mustang (1969, Gas)
-- Porsche Taycan (2024, Electric)
-- Toyota Camry (2022, Gas)
+- Tesla Cybertruck (2024, fuelLevel: 85)
+- BMW X5 (2023, fuelLevel: 42)
+- Audi A4 (2022, fuelLevel: 67)
+- Mercedes C-Class (2023, fuelLevel: 91)
+- Ford Mustang (2024, fuelLevel: 23)
+- Chevrolet Camaro (2022, fuelLevel: 76)
+- Toyota Corolla (2023, fuelLevel: 55)
+- Honda Civic (2024, fuelLevel: 89)
+- Nissan Altima (2022, fuelLevel: 34)
+- Volkswagen Golf (2023, fuelLevel: 62)
 
 ## Technologies Used
 

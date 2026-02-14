@@ -6,12 +6,12 @@ const Joi = require('joi');
 
 const DATA_PATH = path.join(__dirname, '../data/cars.json');
 
-// Define the blueprint (Schema) for a Car
+// Define the blueprint (Schema) for a Car (as per cars.json)
 const carSchema = Joi.object({
-    make: Joi.string().min(2).required(),
+    brand: Joi.string().min(2).required(),
     model: Joi.string().min(1).required(),
     year: Joi.number().integer().min(1886).max(2026).required(),
-    electric: Joi.boolean().required()
+    fuelLevel: Joi.number().integer().min(0).max(100).required()
 });
 
 // Helper functions
@@ -49,7 +49,9 @@ router.get('/:id', (req, res) => {
 // POST new car
 router.post('/', validateCar, (req, res) => {
     const cars = readCars();
-    const newCar = { id: cars.length + 1, ...req.body };
+    // Ensure new car has a unique id
+    const newId = cars.length > 0 ? Math.max(...cars.map(c => c.id)) + 1 : 1;
+    const newCar = { id: newId, ...req.body };
     cars.push(newCar);
     saveCars(cars);
     res.status(201).json(newCar);
@@ -59,12 +61,18 @@ router.post('/', validateCar, (req, res) => {
 router.put('/:id', validateCar, (req, res) => {
     const cars = readCars();
     const carIndex = cars.findIndex(c => c.id === parseInt(req.params.id));
-    
     if (carIndex === -1) {
         return res.status(404).json({ message: 'Car not found' });
     }
-    
-    const updatedCar = { ...cars[carIndex], ...req.body, id: cars[carIndex].id };
+    // Only update allowed fields
+    const updatedCar = {
+        ...cars[carIndex],
+        brand: req.body.brand,
+        model: req.body.model,
+        year: req.body.year,
+        fuelLevel: req.body.fuelLevel,
+        id: cars[carIndex].id
+    };
     cars[carIndex] = updatedCar;
     saveCars(cars);
     res.json(updatedCar);
